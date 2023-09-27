@@ -1,5 +1,7 @@
 package edu.cmu.cs.cs214.rec04;
 
+import java.util.Collection;
+
 /**
  * InheritanceSortedIntList -- a variant of a SortedIntList that keeps
  * count of the number of attempted element insertions (not to be confused
@@ -17,7 +19,7 @@ public class InheritanceSortedIntList extends SortedIntList {
     private int totalSum;
 
     // constructor for InheritanceSortedIntList
-    private InheritanceSortedIntList() {
+    public InheritanceSortedIntList() {
         super();
         this.totalSum = 0;
     }
@@ -28,8 +30,15 @@ public class InheritanceSortedIntList extends SortedIntList {
         return super.add(num);
     }
 
-    @Override
-    public boolean addAll(Collection<Integer> c) {
-        
+    public boolean addAll(IntegerList c) {
+        totalSum += c.size();
+        for (int i = 0; i < c.size(); i++) {
+            super.add(c.get(i));
+        }
+        return true;
+    }
+
+    public int getTotalAdded() {
+        return totalSum;
     }
 }
